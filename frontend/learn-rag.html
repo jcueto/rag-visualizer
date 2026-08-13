@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn about RAG | RAG Visualizer</title>
+  <meta name="description" content="Understand Retrieval-Augmented Generation (RAG) — what it is, how it works, and why it matters for AI applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <nav class="page-nav">
+    <a href="/" class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      Back to App
+    </a>
+  </nav>
+
+  <main class="page-content">
+    <article class="page-article">
+      <h1>What is RAG?</h1>
+      <p class="lead">Retrieval-Augmented Generation (RAG) is a technique that makes AI smarter by giving it access to your specific knowledge — your documents, data, and content — before it generates a response.</p>
+
+      <section>
+        <h2>The problem RAG solves</h2>
+        <p>Large Language Models (LLMs) like GPT and Gemini are trained on vast amounts of public data. They're incredibly capable, but they have limitations:</p>
+        <ul>
+          <li><strong>Knowledge cutoff</strong> — They don't know about events or data after their training date</li>
+          <li><strong>No personal context</strong> — They can't access your company's internal documents, your research notes, or your private data</li>
+          <li><strong>Hallucination</strong> — When they don't know something, they sometimes generate plausible-sounding but incorrect information</li>
+          <li><strong>Generic responses</strong> — Without specific context, answers tend to be broad rather than precisely relevant</li>
+        </ul>
+        <div class="insight-box">
+          <h3>💡 The core idea</h3>
+          <p>Instead of relying solely on what the AI was trained on, RAG retrieves relevant information from your own documents and includes it in the prompt. The AI then generates answers grounded in your actual data.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>How RAG works</h2>
+        <p>RAG operates in three stages. Think of it as giving the AI a research assistant that reads your documents before answering:</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Indexing (one-time setup)</h3>
+              <p>Your documents are broken into smaller chunks (paragraphs or sections). Each chunk is converted into a mathematical representation called an <strong>embedding</strong> — a list of numbers that captures the meaning of the text. These embeddings are stored in a special database called a <strong>vector store</strong>.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Retrieval (every question)</h3>
+              <p>When you ask a question, your question is also converted into an embedding. The vector store finds the document chunks whose embeddings are most similar to your question's embedding. This is <strong>semantic search</strong> — it finds content that's related by meaning, not just keyword matching.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Generation (the answer)</h3>
+              <p>The retrieved chunks are combined with your question and sent to the LLM. The AI now has the relevant context from your documents, so it can generate an answer that's both knowledgeable and grounded in your specific data.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>A visual analogy</h2>
+        <div class="analogy-grid">
+          <div class="analogy-card">
+            <div class="analogy-icon">🧠</div>
+            <h3>Without RAG</h3>
+            <p>Like asking a brilliant expert a question — they're smart and well-read, but they haven't seen <em>your</em> specific documents. They'll give a good general answer, but may miss details that matter to you.</p>
+          </div>
+          <div class="analogy-card">
+            <div class="analogy-icon">🧠📄</div>
+            <h3>With RAG</h3>
+            <p>Like giving that same expert your documents to read first, then asking the question. Now they can reference your specific data, cite exact passages, and give answers tailored to your situation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why RAG matters</h2>
+        <div class="card-grid">
+          <div class="info-card blue">
+            <div class="card-icon">🎯</div>
+            <h3>Accuracy</h3>
+            <p>Responses are grounded in real data rather than general training knowledge, dramatically reducing hallucinations.</p>
+          </div>
+          <div class="info-card purple">
+            <div class="card-icon">🔒</div>
+            <h3>Privacy</h3>
+            <p>Your documents stay local — they're processed and stored on your machine, not sent to external training pipelines.</p>
+          </div>
+          <div class="info-card blue">
+            <div class="card-icon">⚡</div>
+            <h3>Always current</h3>
+            <p>Upload new documents anytime. Unlike retraining a model (which takes weeks and costs millions), RAG updates instantly.</p>
+          </div>
+          <div class="info-card purple">
+            <div class="card-icon">📎</div>
+            <h3>Verifiable</h3>
+            <p>RAG can show you exactly which documents and passages it used, so you can verify the answer yourself.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Real-world use cases</h2>
+        <ul>
+          <li><strong>Company knowledge bases</strong> — Let employees ask questions about internal policies, product docs, and procedures</li>
+          <li><strong>Legal document review</strong> — Search and query across contracts, case law, and regulatory filings</li>
+          <li><strong>Research assistance</strong> — Upload papers and ask questions that connect findings across multiple studies</li>
+          <li><strong>Customer support</strong> — Power chatbots with product documentation so they give accurate, specific answers</li>
+          <li><strong>Personal productivity</strong> — Query your own notes, meeting transcripts, and saved articles</li>
+          <li><strong>Financial analysis</strong> — Upload statements and reports, then ask questions about trends, totals, and anomalies</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>The technology behind this app</h2>
+        <div class="tech-stack">
+          <div class="tech-item">
+            <strong>Vector Database</strong>
+            <span>ChromaDB</span>
+            <p>Stores document embeddings locally for fast semantic search</p>
+          </div>
+          <div class="tech-item">
+            <strong>Embeddings</strong>
+            <span>all-MiniLM-L6-v2</span>
+            <p>Converts text into meaning-capturing vectors, runs locally on your machine</p>
+          </div>
+          <div class="tech-item">
+            <strong>Language Model</strong>
+            <span>Google Gemini</span>
+            <p>Generates both the standard and RAG-informed responses</p>
+          </div>
+          <div class="tech-item">
+            <strong>Backend</strong>
+            <span>Python / FastAPI</span>
+            <p>Handles document processing, chunking, and API orchestration</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Want to learn more?</h2>
+        <p>RAG is one of the most impactful patterns in modern AI application development. Here are some recommended resources:</p>
+        <ul>
+          <li><a href="https://research.ibm.com/blog/retrieval-augmented-generation-RAG" target="_blank" rel="noopener">IBM Research: What is RAG?</a></li>
+          <li><a href="https://cloud.google.com/use-cases/retrieval-augmented-generation" target="_blank" rel="noopener">Google Cloud: RAG Overview</a></li>
+          <li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Original RAG Paper (Lewis et al., 2020)</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="page-footer">
+    <a href="/">← Back to App</a>
+    <a href="/about.html">About this App →</a>
+  </footer>
+</body>
+</html>

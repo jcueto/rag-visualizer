@@ -1,0 +1,359 @@
+/* ============================================
+   RAG Visualizer — Info Pages Stylesheet
+   Matches iMessage dark mode theme
+   ============================================ */
+
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #1c1c1e;
+  --bg-tertiary: #2c2c2e;
+  --bg-elevated: #3a3a3c;
+  --imessage-blue: #0b84fe;
+  --rag-green: #30d158;
+  --separator-light: rgba(84, 84, 88, 0.35);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-tertiary: rgba(235, 235, 245, 0.3);
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, 'Helvetica Neue', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation */
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--separator-light);
+  padding: 12px 24px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--imessage-blue);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+}
+
+/* Page Content */
+.page-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.page-article h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  margin-bottom: 12px;
+}
+
+.lead {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.page-article section {
+  margin-bottom: 48px;
+}
+
+.page-article h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.page-article p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.65;
+}
+
+.page-article ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.page-article li {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.page-article a {
+  color: var(--imessage-blue);
+  text-decoration: none;
+}
+
+.page-article a:hover {
+  text-decoration: underline;
+}
+
+/* Info Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.info-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--separator-light);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.info-card.blue {
+  border-left: 3px solid var(--imessage-blue);
+}
+
+.info-card.purple, .info-card.green {
+  border-left: 3px solid var(--rag-green);
+}
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.info-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.info-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--imessage-blue);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.step-content p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Insight Box */
+.insight-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--separator-light);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.insight-box h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.insight-box p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Analogy Grid */
+.analogy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.analogy-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--separator-light);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.analogy-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.analogy-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.analogy-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* File Types */
+.file-types {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.file-type {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.file-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.file-type strong {
+  font-size: 15px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.file-type p {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 0;
+}
+
+/* Tech Stack */
+.tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.tech-item {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.tech-item strong {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.tech-item span {
+  font-size: 14px;
+  color: var(--imessage-blue);
+  font-weight: 500;
+}
+
+.tech-item p {
+  width: 100%;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin: 4px 0 0;
+}
+
+/* Page Footer */
+.page-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+  border-top: 1px solid var(--separator-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-footer a {
+  color: var(--imessage-blue);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
+}
+
+.page-footer a:hover {
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .page-content { padding: 32px 16px 60px; }
+  .page-article h1 { font-size: 26px; }
+  .lead { font-size: 16px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .analogy-grid { grid-template-columns: 1fr; }
+  .step { gap: 12px; }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About RAG Visualizer</title>
+  <meta name="description" content="Learn how RAG Visualizer works and how to get the most out of dual AI responses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <nav class="page-nav">
+    <a href="/" class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      Back to App
+    </a>
+  </nav>
+
+  <main class="page-content">
+    <article class="page-article">
+      <h1>About RAG Visualizer</h1>
+      <p class="lead">RAG Visualizer is an AI-powered tool that helps you understand how your own documents change the way an AI responds to questions — in real time.</p>
+
+      <section>
+        <h2>What does this app do?</h2>
+        <p>RAG Visualizer lets you upload your own documents — PDFs, Word files, plain text files, or just paste text directly — and then ask questions about them using an AI chatbot. What makes it special is that every question you ask produces <strong>two responses side by side</strong>:</p>
+        <div class="card-grid">
+          <div class="info-card blue">
+            <div class="card-icon">🌐</div>
+            <h3>Standard Response</h3>
+            <p>This is what a regular AI chatbot would say. It draws from its general training knowledge — no access to your documents. It can answer anything, but it doesn't know about your specific content.</p>
+          </div>
+          <div class="info-card purple">
+            <div class="card-icon">📚</div>
+            <h3>RAG Response</h3>
+            <p>This response is grounded in your uploaded documents. The AI searches through your content first, finds the most relevant parts, and uses them to craft a targeted answer with source citations.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>How to use it</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Upload your documents</h3>
+              <p>Use the sidebar to drag and drop files (PDF, DOCX, or TXT), or paste raw text directly into the text box. Each document gets processed, split into smaller chunks, and stored in the RAG database for retrieval.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Ask questions</h3>
+              <p>Type any question in the chat bar at the bottom. The app sends your question to the AI twice — once without any document context, and once with the most relevant chunks from your uploaded documents.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Compare the responses</h3>
+              <p>See the two answers side by side. Notice how the RAG response uses your specific data while the standard response gives a more general answer. The RAG response also shows which source documents it used.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Manage your knowledge base</h3>
+              <p>Add more documents anytime to expand what the AI knows. Delete documents you no longer need. The RAG database updates instantly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why side-by-side matters</h2>
+        <p>Seeing both responses together reveals something powerful: <strong>the gap between generic AI knowledge and document-grounded AI knowledge</strong>.</p>
+        <div class="insight-box">
+          <h3>💡 Key Insight</h3>
+          <p>When you ask "What was my total spending last month?" a standard AI can only guess or give general advice. But a RAG-powered AI with your bank statement can give you the exact number, reference specific transactions, and provide personalized analysis.</p>
+        </div>
+        <p>This side-by-side view helps you:</p>
+        <ul>
+          <li><strong>See the value of RAG instantly</strong> — the difference is often dramatic when dealing with specific, personal, or niche content</li>
+          <li><strong>Catch AI hallucinations</strong> — when the standard response confidently states something that contradicts your actual documents, you can see it immediately</li>
+          <li><strong>Understand scope boundaries</strong> — the RAG response will politely redirect off-topic questions, while the standard response answers everything, showing you where document grounding adds value vs. where general knowledge is sufficient</li>
+          <li><strong>Build trust in AI</strong> — by seeing sources cited alongside the RAG response, you can verify that the AI is actually using your documents rather than making things up</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Supported file types</h2>
+        <div class="file-types">
+          <div class="file-type">
+            <span class="file-icon">📄</span>
+            <div>
+              <strong>PDF</strong>
+              <p>Research papers, reports, invoices, statements</p>
+            </div>
+          </div>
+          <div class="file-type">
+            <span class="file-icon">📝</span>
+            <div>
+              <strong>Word Documents (.docx)</strong>
+              <p>Essays, proposals, meeting notes, documentation</p>
+            </div>
+          </div>
+          <div class="file-type">
+            <span class="file-icon">📃</span>
+            <div>
+              <strong>Text Files (.txt)</strong>
+              <p>Logs, code documentation, plain text notes</p>
+            </div>
+          </div>
+          <div class="file-type">
+            <span class="file-icon">✏️</span>
+            <div>
+              <strong>Raw Text</strong>
+              <p>Paste or type anything directly into the app</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Tips for best results</h2>
+        <ul>
+          <li><strong>Be specific with questions</strong> — instead of "Tell me about the document," ask "What are the key findings in section 3?"</li>
+          <li><strong>Upload focused content</strong> — a few relevant documents work better than dozens of unrelated ones</li>
+          <li><strong>Try off-topic questions</strong> — see how the RAG response handles questions outside your document scope. It should gently redirect you back to relevant topics.</li>
+          <li><strong>Compare related questions</strong> — ask the same topic in different ways to see how both responses adapt</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="page-footer">
+    <a href="/">← Back to App</a>
+    <a href="/learn-rag.html">Learn about RAG →</a>
+  </footer>
+</body>
+</html>

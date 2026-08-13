@@ -1,0 +1,952 @@
+/* ============================================
+   RAG Visualizer — iMessage Dark Mode Theme
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  /* iMessage Dark Mode palette */
+  --bg-primary: #000000;
+  --bg-secondary: #1c1c1e;
+  --bg-tertiary: #2c2c2e;
+  --bg-elevated: #3a3a3c;
+
+  /* iMessage blue */
+  --imessage-blue: #0b84fe;
+  --imessage-blue-dark: #0a6fdb;
+  --imessage-green: #30d158;
+
+  /* Grays matching iOS dark mode */
+  --separator: rgba(84, 84, 88, 0.65);
+  --separator-light: rgba(84, 84, 88, 0.35);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-tertiary: rgba(235, 235, 245, 0.3);
+
+  /* Accents */
+  --rag-green: #30d158;
+  --color-success: #30d158;
+  --color-warning: #ffd60a;
+  --color-error: #ff453a;
+  --color-orange: #ff9f0a;
+
+  /* Typography — SF Pro / system-ui */
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============ LAYOUT ============ */
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Hide the orbs — iMessage is clean */
+.bg-orbs {
+  display: none;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 320px;
+  height: 100%;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--separator-light);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--separator-light);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* ============ UPLOAD SECTION ============ */
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--separator-light);
+}
+
+.dropzone {
+  border: 2px dashed var(--separator);
+  border-radius: 12px;
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-tertiary);
+}
+
+.dropzone:hover {
+  border-color: var(--imessage-blue);
+  background: rgba(11, 132, 254, 0.08);
+}
+
+.dropzone.drag-over {
+  border-color: var(--imessage-blue);
+  background: rgba(11, 132, 254, 0.12);
+  transform: scale(1.01);
+}
+
+.dropzone.loading {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.upload-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.dropzone p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.dropzone small {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* Raw text section */
+.raw-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============ FORM ELEMENTS (iOS style) ============ */
+input, textarea {
+  font-family: var(--font-family);
+  font-size: 15px;
+  outline: none;
+  border: none;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 10px 12px;
+  transition: background 0.2s ease;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+input:focus, textarea:focus {
+  background: var(--bg-elevated);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+button {
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#addRawTextBtn {
+  background: var(--imessage-blue);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+#addRawTextBtn:hover {
+  opacity: 0.85;
+}
+
+/* ============ DOCUMENT LIST ============ */
+.documents-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.doc-count {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 22px;
+  text-align: center;
+}
+
+.doc-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Custom Scrollbar — thin & dark */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--separator);
+  border-radius: 2px;
+}
+
+.doc-card {
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 0.25s ease forwards;
+  transition: background 0.15s ease;
+}
+
+.doc-card:hover {
+  background: var(--bg-elevated);
+}
+
+.doc-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.doc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-title {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary);
+}
+
+.doc-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.delete-btn {
+  background: transparent;
+  color: var(--text-tertiary);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 69, 58, 0.15);
+  color: var(--color-error);
+}
+
+/* ============ RAG STATUS ============ */
+.rag-status {
+  padding: 14px 16px;
+  border-top: 1px solid var(--separator-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.status-dot.active {
+  background-color: var(--color-success);
+  box-shadow: 0 0 6px rgba(48, 209, 88, 0.5);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Sidebar Footer Links */
+.sidebar-footer {
+  padding: 20px 12px 8px;
+  border-top: 1px solid var(--separator-light);
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--imessage-blue);
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: rgba(11, 132, 254, 0.1);
+  border: 1px solid rgba(11, 132, 254, 0.15);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.footer-link:hover {
+  background: rgba(11, 132, 254, 0.18);
+  border-color: rgba(11, 132, 254, 0.3);
+}
+
+.footer-link:active {
+  transform: scale(0.97);
+}
+
+/* ============ CHAT AREA ============ */
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============ WELCOME MESSAGE ============ */
+.welcome-message {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.welcome-message h2 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.welcome-message > p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.feature-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--separator-light);
+  padding: 20px 16px;
+  border-radius: 16px;
+  text-align: left;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  background: var(--bg-tertiary);
+}
+
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.feature-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ============ CHAT MESSAGES ============ */
+.message {
+  animation: messageIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* User message — iMessage blue bubble */
+.user-message {
+  align-self: flex-end;
+  background: var(--imessage-blue);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 18px 18px 4px 18px;
+  max-width: 70%;
+  font-size: 16px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* ============ DUAL RESPONSE CARD ============ */
+.dual-response {
+  width: 100%;
+  background: var(--bg-secondary);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.dual-columns {
+  display: flex;
+}
+
+.response-column {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 340px;
+}
+
+.response-column:first-child {
+  border-right: 1px solid var(--separator-light);
+}
+
+.col-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0;
+  padding: 14px 16px 10px 16px;
+  border-bottom: 1px solid var(--separator-light);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+}
+
+.col-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 16px;
+  overscroll-behavior: contain;
+}
+
+.std-header {
+  color: var(--imessage-blue);
+}
+
+.std-header svg {
+  stroke: var(--imessage-blue);
+}
+
+.rag-header {
+  color: var(--rag-green);
+}
+
+.rag-header svg {
+  stroke: var(--rag-green);
+}
+
+/* Response content — markdown rendering */
+.col-content {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.col-content p {
+  margin-bottom: 10px;
+}
+
+.col-content p:last-child {
+  margin-bottom: 0;
+}
+
+.col-content ul, .col-content ol {
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.col-content li {
+  margin-bottom: 4px;
+}
+
+.col-content strong {
+  font-weight: 600;
+}
+
+.col-content pre {
+  background: var(--bg-primary);
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.col-content code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.col-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.col-content h1, .col-content h2, .col-content h3,
+.col-content h4, .col-content h5, .col-content h6 {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.col-content blockquote {
+  border-left: 3px solid var(--separator);
+  padding-left: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+/* ============ RAG SPECIFIC ============ */
+
+/* Off-topic warning */
+.off-topic-warning {
+  background: rgba(255, 214, 10, 0.08);
+  border-left: 3px solid var(--color-warning);
+  padding: 10px 12px;
+  border-radius: 0 10px 10px 0;
+  margin-bottom: 12px;
+  color: var(--color-warning);
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.off-topic-warning svg {
+  stroke: var(--color-warning);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Source chips */
+.sources-container {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--separator-light);
+}
+
+.sources-title {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.sources-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.source-chip {
+  background: rgba(48, 209, 88, 0.1);
+  border: 1px solid rgba(48, 209, 88, 0.25);
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  color: var(--rag-green);
+  cursor: help;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s ease;
+}
+
+.source-chip:hover {
+  background: rgba(48, 209, 88, 0.18);
+}
+
+.source-chip svg {
+  stroke: var(--rag-green);
+}
+
+/* Empty RAG state */
+.empty-rag-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 80px;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-rag-state span {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.empty-rag-state p {
+  font-size: 13px;
+}
+
+/* ============ TYPING INDICATOR ============ */
+.typing-indicator {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ============ CHAT INPUT — iMessage style ============ */
+.chat-input-container {
+  padding: 8px 12px 12px;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--separator-light);
+}
+
+.chat-input-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 22px;
+  padding: 4px 4px 4px 16px;
+  border: 1px solid var(--separator-light);
+  transition: border-color 0.2s ease;
+}
+
+.chat-input-wrapper:focus-within {
+  border-color: var(--separator);
+}
+
+#chatInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 8px 0;
+  max-height: 120px;
+  min-height: 36px;
+  font-size: 16px;
+  color: var(--text-primary);
+  line-height: 1.4;
+  resize: none;
+}
+
+#chatInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+#chatInput:focus {
+  background: transparent;
+}
+
+/* Send button — iMessage blue arrow */
+#sendBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--imessage-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+#sendBtn:hover {
+  opacity: 0.85;
+}
+
+#sendBtn svg {
+  width: 16px;
+  height: 16px;
+  margin-left: 1px;
+}
+
+/* ============ TOAST NOTIFICATIONS ============ */
+.toast-container {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: toastIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  border: 1px solid var(--separator-light);
+}
+
+.toast.success {
+  border-left: 3px solid var(--color-success);
+}
+
+.toast.error {
+  border-left: 3px solid var(--color-error);
+}
+
+.toast.warning {
+  border-left: 3px solid var(--color-warning);
+}
+
+.toast.fade-out {
+  animation: toastOut 0.25s ease forwards;
+}
+
+@keyframes toastIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes toastOut {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-20px); opacity: 0; }
+}
+
+/* ============ MOBILE TOGGLE ============ */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--separator-light);
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 1px;
+  transition: all 0.25s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+}
+
+.hamburger::before { transform: translateY(-5px); }
+.hamburger::after { transform: translateY(5px); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    width: 300px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.6);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .dual-columns {
+    flex-direction: column;
+  }
+
+  .response-column {
+    height: 240px;
+  }
+
+  .response-column:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--separator-light);
+  }
+
+  .chat-messages {
+    padding: 56px 12px 12px;
+  }
+
+  .chat-input-container {
+    padding: 6px 8px 8px;
+  }
+
+  .user-message {
+    max-width: 85%;
+  }
+
+  .welcome-message h2 {
+    font-size: 22px;
+  }
+}

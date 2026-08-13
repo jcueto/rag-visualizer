@@ -1,0 +1,28 @@
+# Local Environment Config
+backend/.env
+
+# Local Databases & Registry
+backend/chroma_db/
+backend/doc_registry.json
+
+# Local Uploads Folder
+backend/uploads/
+
+# Python Cache & Artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
