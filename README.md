@@ -9,21 +9,34 @@
 </p>
 
 <p align="center">
+  <a href="#what-is-rag">What is RAG?</a> •
   <a href="#features">Features</a> •
   <a href="#how-it-works">How It Works</a> •
   <a href="#getting-started">Getting Started</a> •
+  <a href="#using-the-app--value-of-side-by-side">Using the App & Value of Side-by-Side</a> •
   <a href="#directory-structure">Directory Structure</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#security-audit">Security Audit</a>
+  <a href="#tech-stack">Tech Stack</a>
 </p>
 
 ---
 
 ## Overview
 
-RAG Visualizer is an interactive, full-stack application designed to demonstrate the real-world value of **Retrieval-Augmented Generation (RAG)**. By presenting a **Standard AI Response** side-by-side with a **RAG-Grounded Response**, the app visually highlights the difference between generic LLM outputs and context-accurate, source-cited responses in real time.
+RAG Visualizer is an interactive, full-stack application designed to demonstrate the real-world value of **Retrieval-Augmented Generation (RAG)**. By presenting a **Standard AI Response** side-by-side with a **RAG-Grounded Response** in real time, the app visually highlights the contrast between generic LLM outputs and context-accurate, source-cited completions.
 
-The application features a premium iOS-inspired dark mode theme (mimicking iMessage in night mode) with responsive side-by-side columns, fixed headers, independent panel scrolling, and persistent local document storage.
+---
+
+## What is RAG?
+
+**Retrieval-Augmented Generation (RAG)** is an architectural pattern that enhances the capabilities of a Large Language Model (LLM) by dynamically feeding it relevant external data prior to generating a response. 
+
+### Why is RAG Important and Useful?
+Standard LLMs are trained on massive, public datasets. While highly capable, they suffer from critical limitations in production environments:
+1. **Lack of Private Context**: They do not know about your private files, internal company documents, or real-time data.
+2. **Knowledge Cutoff**: They cannot access information generated after their training data was frozen.
+3. **Hallucination Risk**: When asked about specific details they don't know, they often invent plausible-sounding but completely incorrect details.
+
+**RAG solves these problems** by splitting your documents into chunks, indexing them in a vector database, and querying them for semantically relevant matches whenever a user asks a question. This relevant context is passed directly to the model's prompt. The LLM acts as an intelligent reader and synthesizes a factual response grounded strictly in the provided data.
 
 ---
 
@@ -49,12 +62,6 @@ The RAG model prompt enforces boundary control:
 ### 🔍 Local Semantic Search
 - Powered by **ChromaDB**'s persistent vector client.
 - Automatically generates embeddings locally using the default `all-MiniLM-L6-v2` transformer model via ONNX runtime—meaning no third-party APIs are called for embeddings.
-
-### 🎨 iMessage Dark Mode Theme
-- Pure black background (`#000000`) and dark gray cards matching iOS dark system colors (`#1c1c1e`, `#2c2c2e`).
-- Pinned standard and RAG headers with independent body scroll panels.
-- Custom custom scrollbars and snappy iOS-style transitions.
-- Fully responsive layout that stacks columns vertically on mobile screens.
 
 ---
 
@@ -136,6 +143,29 @@ sequenceDiagram
 
 ---
 
+## Using the App & Value of Side-by-Side
+
+### Step-by-Step Instructions
+1. **Load Context**: In the left sidebar, upload a document (such as a company policy, research paper, financial statement, or private notes) or paste raw text. Ensure the "RAG Status" lights up green.
+2. **Interact**: Ask questions about the uploaded content using the chat bar at the bottom.
+3. **Analyze**: Compare the Standard Knowledge response on the left with the RAG Response on the right.
+
+### Value of the Side-by-Side Comparison
+Seeing the outputs next to each other illustrates how anchoring an LLM changes its response. Key values include:
+- **Identifying Hallucinations**: You can immediately see when a standard model confidently makes up answers to specific queries vs. how a RAG model restricts its output to source material.
+- **Observing the Context Delta**: Notice how standard responses are generic and high-level, whereas RAG responses contain precise terms, numbers, dates, and names retrieved directly from your documents.
+- **Verification of Citations**: RAG outputs print interactive source chips at the bottom. You can see exactly which portions of your files informed the model, building trust in the output.
+
+### Potential Queries to Try
+1. **Specific Facts**: Upload a document and ask: *"What is my account number?"* or *"What is the policy for remote work?"*
+   - *Observation*: The standard model will state it doesn't have access to your personal files or will hallucinate a generic response, while RAG returns the exact details.
+2. **Out of Scope (Topic Guardrails)**: Ask: *"How do I bake a chocolate cake?"*
+   - *Observation*: The standard model will give you a full recipe. The RAG model (unless you uploaded a recipe document) will flag a warning and politely redirect you back to the topics in your files.
+3. **General Knowledge Synthesis**: Ask: *"Summarize the main themes here."*
+   - *Observation*: Standard model gives general summarization tips; RAG generates a specific, structured summary of the uploaded document.
+
+---
+
 ## Directory Structure
 
 ```
@@ -170,11 +200,3 @@ rag-visualizer/
 - **Text Extractors**: PyMuPDF (PDFs) and `python-docx` (DOCX files)
 - **Frontend Engine**: Vanilla HTML5, CSS3 (iMessage Theme), and JavaScript (ES6)
 - **Markdown Processing**: `marked.js` with `DOMPurify` sanitizer
-
----
-
-## Security Audit
-
-To ensure maximum safety when publishing to a public repository:
-1. **Configured `.gitignore`**: Blocks pushing sensitive data including local API keys (`backend/.env`), local SQLite ChromaDB stores (`backend/chroma_db/`), temporary files (`backend/uploads/`), and metadata registries (`backend/doc_registry.json`).
-2. **Credential Sanitization**: The local repository's git remote credentials have been sanitized to remove raw Personal Access Tokens from the origin URL, protecting your terminal output and local configuration files.
