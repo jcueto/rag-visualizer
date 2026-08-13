@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/hero.jpg" alt="RAG Visualizer — Ground AI responses with your documents" width="100%" />
+  <img src="docs/hero.png" alt="RAG Visualizer — Ground AI responses with your documents" width="100%" />
 </p>
 
 <h1 align="center">RAG Visualizer</h1>
@@ -143,7 +143,7 @@ rag-visualizer/
 ├── README.md                  # Detailed overview & guide
 ├── .gitignore                 # Prevents pushing caches, DBs, and credentials
 ├── docs/
-│   └── hero.jpg               # Visual header image mockup
+│   └── hero.png               # Visual header image mockup
 ├── backend/
 │   ├── main.py                # FastAPI entry point, endpoints, & static mounting
 │   ├── document_processor.py  # Ingestion & sentence-boundary chunking logic
